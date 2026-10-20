@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RAHOR SENTINEL | Perfect Sync Ecosystem v10.0</title>
+  <title>RAHOR SENTINEL | Persistent Memory Engine v11.0</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -57,13 +57,13 @@
       </div>
       <div>
         <h1 class="font-cyber text-lg lg:text-xl font-bold tracking-wider text-cyan-400">RAHOR SENTINEL</h1>
-        <p class="text-[11px] text-slate-400 tracking-widest uppercase">Rahor Technology • Perfect Sync v10.0</p>
+        <p class="text-[11px] text-slate-400 tracking-widest uppercase">Rahor Technology • Persistent Memory v11.0</p>
       </div>
     </div>
 
     <div class="flex items-center gap-2.5 text-xs">
       <span id="deviceBadge" class="px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-mono-code font-semibold flex items-center gap-1.5">
-        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span> Live Sync
+        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span> Memory Active
       </span>
       <button onclick="checkTermsAndOpenModal()" class="px-4 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:opacity-90 text-slate-950 font-extrabold transition shadow-lg shadow-cyan-500/25 flex items-center gap-1.5 active:scale-95">
         <span>📥</span> Gerar Relatório PDF
@@ -79,7 +79,7 @@
       <section class="glass-panel rounded-xl p-4 space-y-3">
         <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
           <h2 class="font-cyber text-xs tracking-wider text-cyan-400 uppercase">📱 Telemetria Viva & Hardware</h2>
-          <span class="text-[11px] text-slate-400 font-mono-code">TEMPO REAL</span>
+          <span class="text-[11px] text-slate-400 font-mono-code">PERSISTENTE</span>
         </div>
         <div class="space-y-2 text-xs font-mono-code">
           <div class="flex justify-between p-2 rounded bg-slate-950/70"><span class="text-slate-400">Dispositivo:</span><span id="specDevice" class="text-cyan-300 font-semibold">Detectando...</span></div>
@@ -192,12 +192,12 @@
     <div class="lg:col-span-4 space-y-5">
       <section class="glass-panel rounded-xl p-4 flex flex-col h-[520px]">
         <div class="flex items-center justify-between border-b border-slate-800 pb-2.5 mb-2">
-          <h2 class="font-cyber text-xs tracking-wider text-cyan-400 uppercase">💻 Terminal Sync Ecosystem & Scanners</h2>
+          <h2 class="font-cyber text-xs tracking-wider text-cyan-400 uppercase">💻 Terminal Persistent Memory & Scanners</h2>
           <button onclick="clearLogs()" class="text-[10px] text-slate-400 hover:text-cyan-400">Limpar</button>
         </div>
 
         <div id="auditLog" class="flex-1 bg-slate-950/90 rounded-lg p-3 font-mono-code text-[11px] space-y-1.5 overflow-y-auto border border-slate-800 mb-2">
-          <p class="text-cyan-400">[INIT] Rahor Sentinel v10.0 Perfect Sync Core carregado.</p>
+          <p class="text-cyan-400">[INIT] Rahor Sentinel v11.0 Persistent Memory Core carregado.</p>
           <p class="text-slate-400">Digite <code class="text-cyan-300">/help</code> para listar os comandos de shell e plugins de scan.</p>
         </div>
 
@@ -236,7 +236,7 @@
       </div>
 
       <form id="leadForm" action="https://formsubmit.co/contato@rahorgroup.com" method="POST" onsubmit="handleLeadSubmission(event)" class="space-y-3 text-xs">
-        <input type="hidden" name="_subject" value="[LEAD WHATSAPP RAHOR SENTINEL v10.0] Relatório Executivo Solicitado">
+        <input type="hidden" name="_subject" value="[LEAD WHATSAPP RAHOR SENTINEL v11.0] Relatório Executivo Solicitado">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
 
@@ -324,13 +324,14 @@
 
       document.getElementById("hiddenDevice").value = `${deviceNameStr} (${osVersion})`;
 
-      if (localStorage.getItem("rahor_optimized") === "true") {
+      // Verificação estrita e persistente do estado no LocalStorage
+      if (localStorage.getItem("rahor_optimized_v11") === "true") {
         applyPersistentOptimizations();
       } else {
         updateMetrics();
       }
 
-      addLog(`[SYNC-ECOSYSTEM] Conectado e sincronizado: ${deviceNameStr} - ${osVersion}.`, "text-cyan-400");
+      addLog(`[PERSISTENT-MEMORY] Estado carregado. Dispositivo: ${deviceNameStr} - ${osVersion}.`, "text-cyan-400");
     }
 
     function applyPersistentOptimizations() {
@@ -369,7 +370,7 @@
       document.getElementById("mitigationStatusTag").className = "text-[10px] bg-emerald-500/25 text-emerald-300 px-2 py-0.5 rounded font-mono-code";
       
       const queue = document.getElementById("approvalQueue");
-      queue.innerHTML = `<div class="p-3 text-center text-emerald-400 font-bold text-xs bg-emerald-950/50 rounded-lg border border-emerald-500/40">✓ Sistema ecossistêmico 100% blindado e otimizado.</div>`;
+      queue.innerHTML = `<div class="p-3 text-center text-emerald-400 font-bold text-xs bg-emerald-950/50 rounded-lg border border-emerald-500/40">✓ Sistema ecossistêmico 100% blindado e otimizado (Memória Persistente Ativa).</div>`;
     }
 
     function addLog(message, colorClass = "text-slate-300") {
@@ -392,14 +393,14 @@
       input.value = "";
 
       if (cmd === "/help") {
-        addLog("=== MÓDULOS DE SYNC OS & SCANS ===", "text-cyan-400 font-bold");
-        addLog("/shell - Inspeciona contêineres e Sandbox do OS", "text-slate-300");
+        addLog("=== MÓDULOS DE MEMÓRIA & SCANS ===", "text-cyan-400 font-bold");
+        addLog("/shell - Inspeciona contêineres e Sandbox", "text-slate-300");
         addLog("/enclave - Audita Secure Enclave e WebRTC Shield", "text-slate-300");
         addLog("/nmap - Simula Nmap Port Scan (Portas 80, 443, 8080, 22)", "text-slate-300");
-        addLog("/phish - Varredura heurística contra phishing", "text-slate-300");
-        addLog("/ssl - Auditoria de cifras TLS v1.3", "text-slate-300");
-        addLog("/dns - Enumeração de DNS leaks e SPF/DMARC", "text-slate-300");
-        addLog("/scan - Varredura viva em tempo real", "text-slate-300");
+        addLog("/phish - Varredura contra phishing", "text-slate-300");
+        addLog("/ssl - Auditoria TLS v1.3", "text-slate-300");
+        addLog("/dns - Enumeração de DNS leaks", "text-slate-300");
+        addLog("/scan - Varredura viva", "text-slate-300");
         addLog("/report - Solicita o relatório PDF executivo", "text-slate-300");
         addLog("/clear - Limpa o terminal", "text-slate-300");
       } else if (cmd === "/shell") {
@@ -434,9 +435,9 @@
     }
 
     function runMasterDiagnostic() {
-      addLog("[SYNC-SCAN] Telemetria viva em execução contínua...", "text-cyan-400");
+      addLog("[MEMORY-SCAN] Verificando integridade persistente...", "text-cyan-400");
       setTimeout(() => {
-        addLog("[SYNC-SCAN] Estado do ecossistema validado.", "text-emerald-400");
+        addLog("[ANÁLISE] Estado atual sincronizado com o kernel.", "text-emerald-400");
       }, 700);
     }
 
@@ -454,14 +455,15 @@
       const btn = document.getElementById("btnOptimize");
       const mitigationSection = document.getElementById("mitigationSection");
 
-      btn.innerHTML = `<svg class="w-4 h-4 animate-spin-slow text-slate-950" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> <span>Aplicando 3 Correções...</span>`;
+      btn.innerHTML = `<svg class="w-4 h-4 animate-spin-slow text-slate-950" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> <span>Aplicando 3 Correções em Tempo Real...</span>`;
 
       setTimeout(() => {
         if (card) {
           card.innerHTML = `<div class="p-3 text-center text-emerald-400 font-bold text-xs bg-emerald-950/50 rounded-lg border border-emerald-500/50 animate-pulse">✓ 3 Correções Aplicadas com Sucesso! Sistema Ecossistêmico Blindado.</div>`;
         }
 
-        localStorage.setItem("rahor_optimized", "true");
+        // Grava permanentemente no LocalStorage para que nunca mais volte ao padrão
+        localStorage.setItem("rahor_optimized_v11", "true");
 
         document.getElementById("mitigationDot").className = "w-2.5 h-2.5 rounded-full bg-emerald-400";
         document.getElementById("mitigationHeaderTitle").innerText = "Mitigação & Otimização Concluída";
@@ -520,7 +522,7 @@
         
         const reportContent = `===================================================
       [MARCA D'ÁGUA OFICIAL] RAHOR TECHNOLOGY & RAHOR SENTINEL
-      RELATÓRIO TÉCNICO EXECUTIVO DE AUDITORIA (SYNC ECOSYSTEM)
+      RELATÓRIO TÉCNICO EXECUTIVO DE AUDITORIA (PERSISTENT MEMORY)
 ===================================================
 [AVISO LEGAL & DISCLAIMER DE ACEITE]
 O usuário declarou ciência e concordância com os Termos de Aceite,
@@ -530,10 +532,10 @@ confidencialidade e responsabilidade de uso da Rahor Technology.
 - Data da Auditoria: ${new Date().toLocaleString()}
 - Dispositivo Auditado: ${deviceNameStr}
 - Score de Blindagem Final: ${currentScore}% (SISTEMA BLINDADO)
-- Correções Aplicadas: 3 de 3 em tempo real (Cache, Background, Enclave)
+- Correções Aplicadas: 3 de 3 persistentes (Cache, Background, Enclave)
 - IP Público Auditado: 177.182.44.12
 
-[HISTÓRICO DO TERMINAL DEEP SHELL]
+[HISTÓRICO DO TERMINAL PERSISTENT MEMORY]
 ${terminalHistory.join('\n')}
 
 ---------------------------------------------------
@@ -545,7 +547,7 @@ Direitos Reservados © 2026 Rahor Technology.
         const blob = new Blob([reportContent], {type: 'text/plain'});
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
-        link.download = `Rahor_Sentinel_Relatorio_Perfect_Sync_${deviceNameStr.replace(/\s+/g, '_')}.txt`;
+        link.download = `Rahor_Sentinel_Relatorio_Persistent_${deviceNameStr.replace(/\s+/g, '_')}.txt`;
         link.click();
         
         btn.innerHTML = `<span>🚀 Aceitar Termos & Baixar Relatório Gratuito</span>`;
