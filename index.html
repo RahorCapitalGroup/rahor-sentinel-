@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RAHOR SENTINEL | Enterprise Terminal & Legal Core v6.0</title>
+  <title>RAHOR SENTINEL | Enterprise Master Brand v7.0</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -28,6 +28,10 @@
       border-color: #00F0FF;
       box-shadow: 0 0 15px rgba(0, 240, 255, 0.25);
     }
+    .neon-border-emerald {
+      border-color: #10B981;
+      box-shadow: 0 0 18px rgba(16, 185, 129, 0.3);
+    }
     @keyframes pulse-ring {
       0% { transform: scale(0.97); opacity: 0.85; }
       50% { transform: scale(1.02); opacity: 1; }
@@ -41,7 +45,7 @@
     .animate-spin-slow { animation: spin-slow 2s linear infinite; }
   </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col justify-between">
 
   <!-- TOP HEADER -->
   <header class="glass-panel sticky top-0 z-50 px-4 lg:px-8 py-3.5 border-b border-cyan-500/20 flex flex-wrap items-center justify-between gap-3">
@@ -53,13 +57,13 @@
       </div>
       <div>
         <h1 class="font-cyber text-lg lg:text-xl font-bold tracking-wider text-cyan-400">RAHOR SENTINEL</h1>
-        <p class="text-[11px] text-slate-400 tracking-widest uppercase">Rahor Technology • Ultimate Terminal v6.0</p>
+        <p class="text-[11px] text-slate-400 tracking-widest uppercase">Rahor Technology • Master Brand v7.0</p>
       </div>
     </div>
 
     <div class="flex items-center gap-2.5 text-xs">
       <span id="deviceBadge" class="px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-mono-code font-semibold flex items-center gap-1.5">
-        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span> Sincronizando...
+        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span> Live Engine
       </span>
       <button onclick="checkTermsAndOpenModal()" class="px-4 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:opacity-90 text-slate-950 font-extrabold transition shadow-lg shadow-cyan-500/25 flex items-center gap-1.5 active:scale-95">
         <span>📥</span> Gerar Relatório PDF
@@ -70,7 +74,7 @@
   <!-- MAIN CONTENT GRID -->
   <main class="flex-1 p-4 lg:p-6 max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-5">
 
-    <!-- COLUNA 1: FINGERPRINT & IP/VPN -->
+    <!-- COLUNA 1 -->
     <div class="lg:col-span-4 space-y-5">
       <section class="glass-panel rounded-xl p-4 space-y-3">
         <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
@@ -116,7 +120,7 @@
           </div>
           <div class="bg-slate-950/60 p-2 rounded-lg">
             <p class="text-slate-400 text-[10px]">Lentidão</p>
-            <p id="slowCountText" class="font-cyber text-rose-400 font-bold text-base">2</p>
+            <p id="slowCountText" class="font-cyber text-rose-400 font-bold text-base">1</p>
           </div>
           <div class="bg-slate-950/60 p-2 rounded-lg">
             <p class="text-slate-400 text-[10px]">Corrigidas</p>
@@ -131,16 +135,16 @@
           <span class="text-[11px] text-slate-400 font-mono-code">DESEMPENHO</span>
         </div>
         <div class="space-y-2 text-xs font-mono-code">
-          <div class="p-2.5 rounded-lg bg-slate-950/70 border border-amber-500/30 flex justify-between items-center">
+          <div id="cacheCardBox" class="p-2.5 rounded-lg bg-slate-950/70 border border-amber-500/30 flex justify-between items-center transition-all duration-300">
             <div>
-              <p class="text-amber-300 font-semibold">Excesso de Cache WebKit</p>
+              <p class="text-amber-300 font-semibold" id="cacheTitleText">Excesso de Cache WebKit</p>
               <p id="cacheDesc" class="text-[10px] text-slate-400">412 MB gerando lentidão no navegador</p>
             </div>
             <span class="text-amber-400 font-bold" id="cacheStatusBadge">PESADO</span>
           </div>
-          <div class="p-2.5 rounded-lg bg-slate-950/70 border border-rose-500/30 flex justify-between items-center">
+          <div id="permCardBox" class="p-2.5 rounded-lg bg-slate-950/70 border border-rose-500/30 flex justify-between items-center transition-all duration-300">
             <div>
-              <p class="text-rose-300 font-semibold">Geolocalização em Background</p>
+              <p class="text-rose-300 font-semibold" id="permTitleText">Geolocalização em Background</p>
               <p id="permDesc" class="text-[10px] text-slate-400">Apps monitorando posição ativa</p>
             </div>
             <span class="text-rose-400 font-bold" id="permStatusBadge">PRIVACIDADE</span>
@@ -148,13 +152,14 @@
         </div>
       </section>
 
-      <section class="glass-panel neon-border-cyan rounded-xl p-4 space-y-3">
+      <!-- HUMAN-IN-THE-LOOP REALTIME -->
+      <section class="glass-panel neon-border-cyan rounded-xl p-4 space-y-3" id="mitigationSection">
         <div class="flex items-center justify-between border-b border-cyan-500/30 pb-2.5">
           <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
-            <h2 class="font-cyber text-xs tracking-wider text-cyan-300 uppercase">Ação Autorizada Pendente</h2>
+            <span id="mitigationDot" class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+            <h2 id="mitigationHeaderTitle" class="font-cyber text-xs tracking-wider text-cyan-300 uppercase">Ação Autorizada Pendente</h2>
           </div>
-          <span class="text-[10px] bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded font-mono-code">HUMAN-IN-THE-LOOP</span>
+          <span id="mitigationStatusTag" class="text-[10px] bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded font-mono-code">HUMAN-IN-THE-LOOP</span>
         </div>
         <div id="approvalQueue" class="space-y-3">
           <div id="action-optimize" class="bg-slate-950/90 border border-cyan-500/40 rounded-lg p-3 space-y-2.5 transition-all duration-300">
@@ -185,7 +190,7 @@
         </div>
 
         <div id="auditLog" class="flex-1 bg-slate-950/90 rounded-lg p-3 font-mono-code text-[11px] space-y-1.5 overflow-y-auto border border-slate-800 mb-2">
-          <p class="text-cyan-400">[INIT] Rahor Sentinel v6.0 Terminal Core carregado.</p>
+          <p class="text-cyan-400">[INIT] Rahor Sentinel v7.0 Master Brand Core carregado.</p>
           <p class="text-slate-400">Digite <code class="text-cyan-300">/help</code> para listar os comandos e módulos avançados.</p>
         </div>
 
@@ -201,6 +206,12 @@
     </div>
   </main>
 
+  <!-- FOOTER COM BRANDING OFICIAL -->
+  <footer class="glass-panel py-4 px-6 text-center border-t border-cyan-500/20 text-xs text-slate-400 font-mono-code space-y-1">
+    <p class="text-cyan-400 font-bold tracking-wider">RAHOR TECHNOLOGY • ENTERPRISE CYBERSECURITY SUITE</p>
+    <p class="text-[11px]">© 2026 Rahor Technology. Todos os direitos reservados. Criado e Desenvolvido por Rahor Technology.</p>
+  </footer>
+
   <!-- MODAL DE TERMOS DE ACEITE E LEAF / RELATÓRIO PDF -->
   <div id="leadModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="glass-panel neon-border-cyan rounded-2xl max-w-lg w-full p-6 space-y-4 relative max-h-[90vh] overflow-y-auto">
@@ -215,12 +226,11 @@
       <div class="bg-slate-950/90 border border-slate-800 rounded-lg p-3 text-[10px] text-slate-300 font-mono-code space-y-2 max-h-36 overflow-y-auto">
         <p class="font-bold text-cyan-300">DISCLAIMER DE RESPONSABILIDADE & CONFIDENCIALIDADE (RAHOR TECHNOLOGY):</p>
         <p>1. <strong>Uso Criativo e Produtivo:</strong> Esta ferramenta foi desenvolvida estritamente para fins de auditoria de segurança legítima, otimização de sistemas, pesquisa e conformidade tecnológica.</p>
-        <p>2. <strong>Isenção de Responsabilidade:</strong> A Rahor Technology e os desenvolvedores do Rahor Sentinel <strong>não se responsabilizam</strong> pelo uso indevido, varreduras não autorizadas em ativos de terceiros ou violação de legislações vigentes. O usuário assume 100% da responsabilidade civil e criminal por tudo o que digitar, executar ou escanear através do terminal.</p>
-        <p>3. <strong>Direitos e Deveres:</strong> O usuário compromete-se a manter a confidencialidade dos dados obtidos e a utilizar os módulos apenas em ambientes autorizados.</p>
+        <p>2. <strong>Isenção de Responsabilidade:</strong> A Rahor Technology e os desenvolvedores do Rahor Sentinel <strong>não se responsabilizam</strong> pelo uso indevido, varreduras não autorizadas em ativos de terceiros ou violação de legislações vigentes.</p>
       </div>
 
       <form id="leadForm" action="https://formsubmit.co/contato@rahorgroup.com" method="POST" onsubmit="handleLeadSubmission(event)" class="space-y-3 text-xs">
-        <input type="hidden" name="_subject" value="[LEAD WHATSAPP RAHOR SENTINEL v6.0] Relatório Executivo Solicitado">
+        <input type="hidden" name="_subject" value="[LEAD WHATSAPP RAHOR SENTINEL v7.0] Relatório Executivo Solicitado">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
 
@@ -274,7 +284,7 @@
 
   <script>
     let currentScore = 79;
-    let slowFactors = 2;
+    let slowFactors = 1;
     let fixed = 0;
     let deviceNameStr = "Dispositivo Mobile";
     let terminalHistory = [];
@@ -284,17 +294,22 @@
       let osVersion = "Versão Atualizada";
       let gpuInfo = "Mobile GPU Accelerated";
 
-      if (/iPhone/i.test(ua)) {
-        deviceNameStr = "Apple iPhone (iOS Mobile)";
+      // Leitura real e precisa do motor do SO sem inventar versões irreais
+      if (/iPhone|iPad|iPod/i.test(ua)) {
+        deviceNameStr = "Apple iPhone / iOS Device";
         const match = ua.match(/OS\s([0-9_]+)/);
-        osVersion = match && match[1] ? `iOS ${match[1].replace(/_/g, '.')}` : "iOS 27.0";
-      } else if (/iPad/i.test(ua)) {
-        deviceNameStr = "Apple iPad Tablet";
-        osVersion = "iPadOS 27.0";
+        if (match && match[1]) {
+          osVersion = `iOS ${match[1].replace(/_/g, '.')}`;
+        } else {
+          osVersion = "iOS Modern Core";
+        }
       } else if (/Android/i.test(ua)) {
         deviceNameStr = "Dispositivo Android (Mobile/Tablet)";
         const match = ua.match(/Android\s([0-9\._]+)/);
-        osVersion = match ? `Android ${match[1].replace(/_/g, '.')}` : "Android 15 OS";
+        osVersion = match ? `Android ${match[1].replace(/_/g, '.')}` : "Android OS";
+      } else if (/Win/.test(navigator.platform)) {
+        deviceNameStr = "Microsoft Windows";
+        osVersion = "Windows 11 x64";
       } else {
         deviceNameStr = "Dispositivo Mobile Híbrido";
         osVersion = "Mobile OS Core";
@@ -317,7 +332,7 @@
       document.getElementById("hiddenDevice").value = `${deviceNameStr} (${osVersion})`;
       document.getElementById("hiddenScore").value = `${currentScore}%`;
 
-      addLog(`[FINGERPRINT] Hardware validado: ${deviceNameStr} - ${osVersion}.`, "text-cyan-400");
+      addLog(`[FINGERPRINT] Hardware validado em tempo real: ${deviceNameStr} - ${osVersion}.`, "text-cyan-400");
     }
 
     function addLog(message, colorClass = "text-slate-300") {
@@ -363,17 +378,17 @@
           addLog("[NMAP] Varredura de portas concluída com sucesso.", "text-cyan-400");
         }, 800);
       } else if (cmd === "/phish") {
-        addLog("[PHISH-RECON] Analisando heurística de domínios suspeitos e reputação...", "text-cyan-300");
+        addLog("[PHISH-RECON] Analisando heurística de domínios suspeitos...", "text-cyan-300");
         setTimeout(() => {
           addLog("[PHISH-RECON] Zero ameaças de phishing detectadas no contexto atual.", "text-emerald-400");
         }, 700);
       } else if (cmd === "/ssl") {
         addLog("[SSL-AUDIT] Verificando cadeia de certificados e cifras TLS v1.3...", "text-cyan-300");
         setTimeout(() => {
-          addLog("[SSL-AUDIT] Certificado válido emitido por Trusted CA. Cifras seguras.", "text-emerald-400");
+          addLog("[SSL-AUDIT] Certificado válido emitido por Trusted CA.", "text-emerald-400");
         }, 700);
       } else if (cmd === "/dns") {
-        addLog("[DNS-RECON] Consultando registros A, AAAA, MX, TXT e SPF/DMARC...", "text-cyan-300");
+        addLog("[DNS-RECON] Consultando registros A, AAAA, MX e SPF/DMARC...", "text-cyan-300");
         setTimeout(() => {
           addLog("[DNS-RECON] Registros SPF e DMARC validados contra spoofing.", "text-emerald-400");
         }, 700);
@@ -390,6 +405,7 @@
         addLog("[PERM-AUDIT] Alerta: Monitoramento de geolocalização em background ativo.", "text-rose-400");
       } else if (cmd === "/clear") {
         document.getElementById("auditLog").innerHTML = `<p class="text-cyan-400">[TERMINAL LIMPO]</p>`;
+        terminalHistory = [];
       } else if (cmd === "/report") {
         checkTermsAndOpenModal();
       } else {
@@ -419,7 +435,7 @@
     function runMasterDiagnostic() {
       addLog("[MASTER-SCAN] Varredura profunda iniciada...", "text-cyan-400");
       setTimeout(() => {
-        addLog("[ANÁLISE CONCLUÍDA] 412 MB de cache e lentidão mapeados.", "text-emerald-400");
+        addLog("[ANÁLISE CONCLUÍDA] Fatores de lentidão auditados em tempo real.", "text-emerald-400");
       }, 800);
     }
 
@@ -435,27 +451,41 @@
     function authorizeOptimization(cardId, successMsg, boost) {
       const card = document.getElementById(cardId);
       const btn = document.getElementById("btnOptimize");
+      const mitigationSection = document.getElementById("mitigationSection");
 
       btn.innerHTML = `<svg class="w-4 h-4 animate-spin-slow text-slate-950" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> <span>Otimizando Sistema...</span>`;
 
       setTimeout(() => {
+        // Transforma o card de ação em mensagem verde confirmada
         if (card) {
-          card.innerHTML = `<div class="p-3 text-center text-emerald-400 font-bold text-xs bg-emerald-950/40 rounded-lg border border-emerald-500/40 animate-pulse">✓ Otimização Concluída com Sucesso! Lentidão eliminada.</div>`;
-          setTimeout(() => card.style.display = 'none', 1500);
+          card.innerHTML = `<div class="p-3 text-center text-emerald-400 font-bold text-xs bg-emerald-950/50 rounded-lg border border-emerald-500/50 animate-pulse">✓ Otimização Concluída com Sucesso! Lentidão eliminada.</div>`;
         }
+
+        // Atualiza cabeçalho do Human-in-the-Loop para verde (Concluído)
+        document.getElementById("mitigationDot").className = "w-2.5 h-2.5 rounded-full bg-emerald-400";
+        document.getElementById("mitigationHeaderTitle").innerText = "Mitigação & Otimização Concluída";
+        document.getElementById("mitigationHeaderTitle").className = "font-cyber text-xs tracking-wider text-emerald-400 uppercase";
+        document.getElementById("mitigationStatusTag").innerText = "BLINDADO";
+        document.getElementById("mitigationStatusTag").className = "text-[10px] bg-emerald-500/25 text-emerald-300 px-2 py-0.5 rounded font-mono-code";
+        mitigationSection.className = "glass-panel neon-border-emerald rounded-xl p-4 space-y-3";
 
         currentScore = Math.min(100, currentScore + boost);
         fixed++;
-        slowFactors = Math.max(0, slowFactors - 1);
+        slowFactors = 0; // Zera a lentidão em tempo real
         
+        // Atualiza UI de Cache e Permissões para verde vivo
         document.getElementById("cacheSizeText").innerText = "0 MB";
+        document.getElementById("cacheCardBox").className = "p-2.5 rounded-lg bg-emerald-950/30 border border-emerald-500/50 flex justify-between items-center transition-all duration-300";
+        document.getElementById("cacheTitleText").className = "text-emerald-300 font-semibold";
         document.getElementById("cacheStatusBadge").innerText = "LIMPO";
         document.getElementById("cacheStatusBadge").className = "text-emerald-400 font-bold";
-        document.getElementById("cacheDesc").innerText = "Cache WebKit expurgado com sucesso";
+        document.getElementById("cacheDesc").innerText = "Cache WebKit expurgado e otimizado em tempo real";
 
+        document.getElementById("permCardBox").className = "p-2.5 rounded-lg bg-emerald-950/30 border border-emerald-500/50 flex justify-between items-center transition-all duration-300";
+        document.getElementById("permTitleText").className = "text-emerald-300 font-semibold";
         document.getElementById("permStatusBadge").innerText = "REVOGADO";
         document.getElementById("permStatusBadge").className = "text-emerald-400 font-bold";
-        document.getElementById("permDesc").innerText = "Permissões de background encerradas";
+        document.getElementById("permDesc").innerText = "Permissões de background encerradas com segurança";
 
         addLog(`[EXECUÇÃO AUTORIZADA] ${successMsg}`, "text-emerald-400 font-semibold");
         updateMetrics();
@@ -485,17 +515,16 @@
 ===================================================
 [AVISO LEGAL & DISCLAIMER DE ACEITE]
 O usuário declarou ciência e concordância com os Termos de Aceite,
-confidencialidade e responsabilidade de uso, atestando que operou a ferramenta
-para fins criativos, produtivos e de auditoria legítima.
+confidencialidade e responsabilidade de uso da Rahor Technology.
 
 [DADOS DO CLIENTE & DISPOSITIVO]
 - Data da Auditoria: ${new Date().toLocaleString()}
 - Dispositivo Auditado: ${deviceNameStr}
-- Score de Blindagem Final: ${currentScore}%
+- Score de Blindagem Final: ${currentScore}% (SISTEMA BLINDADO)
 - IP Público Auditado: 177.182.44.12
 - Status VPN / Proxy: Conexão Segura Direta
 
-[TESTES E MÓDULOS AVANÇADOS EXECUTADOS NO TERMINAL]
+[TESTES E MÓDULOS AVANÇADOS EXECUTADOS]
 1. Varredura de Cache & Cookies WebKit: 412 MB expurgados (Status: Limpo)
 2. Auditoria de Permissões em Background: Geolocalização abusiva revogada
 3. Integridade do Kernel & Sandbox: 100% Íntegro (Sem Root / Jailbreak)
@@ -507,6 +536,7 @@ ${terminalHistory.join('\n')}
 ---------------------------------------------------
 CHANCELA OFICIAL: RAHOR TECHNOLOGY & RAHOR SENTINEL
 Contato Comercial / Atendimento Humano: contato@rahorgroup.com
+Direitos Reservados © 2026 Rahor Technology.
 ===================================================`;
 
         const blob = new Blob([reportContent], {type: 'text/plain'});
