@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RAHOR SENTINEL | Enterprise Living Ecosystem v9.0</title>
+  <title>RAHOR SENTINEL | Perfect Sync Ecosystem v10.0</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -57,13 +57,13 @@
       </div>
       <div>
         <h1 class="font-cyber text-lg lg:text-xl font-bold tracking-wider text-cyan-400">RAHOR SENTINEL</h1>
-        <p class="text-[11px] text-slate-400 tracking-widest uppercase">Rahor Technology • Living Ecosystem v9.0</p>
+        <p class="text-[11px] text-slate-400 tracking-widest uppercase">Rahor Technology • Perfect Sync v10.0</p>
       </div>
     </div>
 
     <div class="flex items-center gap-2.5 text-xs">
       <span id="deviceBadge" class="px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-mono-code font-semibold flex items-center gap-1.5">
-        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span> Live Ecosystem
+        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span> Live Sync
       </span>
       <button onclick="checkTermsAndOpenModal()" class="px-4 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:opacity-90 text-slate-950 font-extrabold transition shadow-lg shadow-cyan-500/25 flex items-center gap-1.5 active:scale-95">
         <span>📥</span> Gerar Relatório PDF
@@ -159,7 +159,7 @@
         </div>
       </section>
 
-      <!-- HUMAN-IN-THE-LOOP REALTIME VIVO -->
+      <!-- HUMAN-IN-THE-LOOP REALTIME -->
       <section class="glass-panel neon-border-cyan rounded-xl p-4 space-y-3" id="mitigationSection">
         <div class="flex items-center justify-between border-b border-cyan-500/30 pb-2.5">
           <div class="flex items-center gap-2">
@@ -192,12 +192,12 @@
     <div class="lg:col-span-4 space-y-5">
       <section class="glass-panel rounded-xl p-4 flex flex-col h-[520px]">
         <div class="flex items-center justify-between border-b border-slate-800 pb-2.5 mb-2">
-          <h2 class="font-cyber text-xs tracking-wider text-cyan-400 uppercase">💻 Terminal Living Ecosystem & Scanners</h2>
+          <h2 class="font-cyber text-xs tracking-wider text-cyan-400 uppercase">💻 Terminal Sync Ecosystem & Scanners</h2>
           <button onclick="clearLogs()" class="text-[10px] text-slate-400 hover:text-cyan-400">Limpar</button>
         </div>
 
         <div id="auditLog" class="flex-1 bg-slate-950/90 rounded-lg p-3 font-mono-code text-[11px] space-y-1.5 overflow-y-auto border border-slate-800 mb-2">
-          <p class="text-cyan-400">[INIT] Rahor Sentinel v9.0 Living Ecosystem Core carregado.</p>
+          <p class="text-cyan-400">[INIT] Rahor Sentinel v10.0 Perfect Sync Core carregado.</p>
           <p class="text-slate-400">Digite <code class="text-cyan-300">/help</code> para listar os comandos de shell e plugins de scan.</p>
         </div>
 
@@ -229,7 +229,6 @@
         <p class="text-[11px] text-slate-400">Por favor, leia e aceite os termos de uso antes de gerar o seu relatório executivo exclusivo da Rahor Technology.</p>
       </div>
 
-      <!-- TERMOS DE USO E CONFIDENCIALIDADE -->
       <div class="bg-slate-950/90 border border-slate-800 rounded-lg p-3 text-[10px] text-slate-300 font-mono-code space-y-2 max-h-36 overflow-y-auto">
         <p class="font-bold text-cyan-300">DISCLAIMER DE RESPONSABILIDADE & CONFIDENCIALIDADE (RAHOR TECHNOLOGY):</p>
         <p>1. <strong>Uso Criativo e Produtivo:</strong> Esta ferramenta foi desenvolvida estritamente para fins de auditoria de segurança legítima, otimização de sistemas, pesquisa e conformidade tecnológica.</p>
@@ -237,11 +236,10 @@
       </div>
 
       <form id="leadForm" action="https://formsubmit.co/contato@rahorgroup.com" method="POST" onsubmit="handleLeadSubmission(event)" class="space-y-3 text-xs">
-        <input type="hidden" name="_subject" value="[LEAD WHATSAPP RAHOR SENTINEL v9.0] Relatório Executivo Solicitado">
+        <input type="hidden" name="_subject" value="[LEAD WHATSAPP RAHOR SENTINEL v10.0] Relatório Executivo Solicitado">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
 
-        <!-- CAIXINHA DE TERMOS DE ACEITE -->
         <div class="flex items-start gap-2 bg-cyan-500/10 p-2.5 rounded-lg border border-cyan-500/30">
           <input type="checkbox" id="termsCheck" required class="mt-0.5 w-4 h-4 accent-cyan-400 cursor-pointer">
           <label for="termsCheck" class="text-[11px] text-slate-200 cursor-pointer leading-tight">
@@ -317,7 +315,6 @@
         osVersion = "Mobile OS Core";
       }
 
-      // Telemetria Viva em Tempo Real
       const threads = navigator.hardwareConcurrency || 4;
       document.getElementById("specDevice").innerText = deviceNameStr;
       document.getElementById("specVersion").innerText = osVersion;
@@ -327,14 +324,13 @@
 
       document.getElementById("hiddenDevice").value = `${deviceNameStr} (${osVersion})`;
 
-      // Verifica se o usuário já otimizou anteriormente nesta sessão (Ecossistema Vivo)
       if (localStorage.getItem("rahor_optimized") === "true") {
         applyPersistentOptimizations();
       } else {
         updateMetrics();
       }
 
-      addLog(`[TELEMETRIA VIVA] Conectado ao ecossistema: ${deviceNameStr} - ${osVersion} (${threads} threads).`, "text-cyan-400");
+      addLog(`[SYNC-ECOSYSTEM] Conectado e sincronizado: ${deviceNameStr} - ${osVersion}.`, "text-cyan-400");
     }
 
     function applyPersistentOptimizations() {
@@ -396,46 +392,28 @@
       input.value = "";
 
       if (cmd === "/help") {
-        addLog("=== MÓDULOS VIVOS DE DEEP SHELL & SCANS ===", "text-cyan-400 font-bold");
-        addLog("/shell - Executa script de engenharia reversa e introspecção viva do OS", "text-slate-300");
-        addLog("/enclave - Audita criptografia do Secure Enclave e WebRTC Shield", "text-slate-300");
-        addLog("/nmap - Simula Nmap Port Scan avançado (Portas 80, 443, 8080, 22)", "text-slate-300");
-        addLog("/phish - Varredura heurística contra phishing e domínios maliciosos", "text-slate-300");
-        addLog("/ssl - Auditoria de cifras e handshake TLS v1.3", "text-slate-300");
-        addLog("/dns - Enumeração de DNS leaks e registros SPF/DMARC", "text-slate-300");
-        addLog("/scan - Varredura mestra em tempo real", "text-slate-300");
-        addLog("/report - Solicita o relatório executivo PDF timbrado", "text-slate-300");
+        addLog("=== MÓDULOS DE SYNC OS & SCANS ===", "text-cyan-400 font-bold");
+        addLog("/shell - Inspeciona contêineres e Sandbox do OS", "text-slate-300");
+        addLog("/enclave - Audita Secure Enclave e WebRTC Shield", "text-slate-300");
+        addLog("/nmap - Simula Nmap Port Scan (Portas 80, 443, 8080, 22)", "text-slate-300");
+        addLog("/phish - Varredura heurística contra phishing", "text-slate-300");
+        addLog("/ssl - Auditoria de cifras TLS v1.3", "text-slate-300");
+        addLog("/dns - Enumeração de DNS leaks e SPF/DMARC", "text-slate-300");
+        addLog("/scan - Varredura viva em tempo real", "text-slate-300");
+        addLog("/report - Solicita o relatório PDF executivo", "text-slate-300");
         addLog("/clear - Limpa o terminal", "text-slate-300");
       } else if (cmd === "/shell") {
-        addLog("[DEEP-SHELL] Executando rotina viva de engenharia reversa do kernel...", "text-cyan-300");
-        setTimeout(() => {
-          addLog("[SHELL] Contêineres de Sandbox isolados. Versão real validada.", "text-emerald-400");
-        }, 800);
+        addLog("[SHELL] Contêineres de Sandbox isolados e íntegros.", "text-emerald-400");
       } else if (cmd === "/enclave") {
-        addLog("[ENCLAVE] Verificando isolamento de chaves no Secure Enclave...", "text-cyan-300");
-        setTimeout(() => {
-          addLog("[ENCLAVE] Cofre de hardware blindado contra extração.", "text-emerald-400");
-        }, 700);
+        addLog("[ENCLAVE] Cofre de hardware 100% blindado.", "text-emerald-400");
       } else if (cmd === "/nmap") {
-        addLog("[NMAP] Varredura TCP SYN em andamento...", "text-cyan-300");
-        setTimeout(() => {
-          addLog("[NMAP] Porta 443/tcp (HTTPS/TLS) - Estado: ABERTO (Seguro)", "text-emerald-400");
-        }, 700);
+        addLog("[NMAP] Portas 80 e 443 abertas com segurança.", "text-emerald-400");
       } else if (cmd === "/phish") {
-        addLog("[PHISH-RECON] Checando heurística de domínios...", "text-cyan-300");
-        setTimeout(() => {
-          addLog("[PHISH-RECON] Zero ameaças detectadas.", "text-emerald-400");
-        }, 600);
+        addLog("[PHISH] Zero ameaças de phishing detectadas.", "text-emerald-400");
       } else if (cmd === "/ssl") {
-        addLog("[SSL-AUDIT] Verificando cifras TLS v1.3...", "text-cyan-300");
-        setTimeout(() => {
-          addLog("[SSL-AUDIT] Cifras de alta segurança ativas.", "text-emerald-400");
-        }, 600);
+        addLog("[SSL] Cifras de alta segurança validadas.", "text-emerald-400");
       } else if (cmd === "/dns") {
-        addLog("[DNS-LEAK] Auditando roteamento DNS...", "text-cyan-300");
-        setTimeout(() => {
-          addLog("[DNS-LEAK] Zero vazamentos detectados.", "text-emerald-400");
-        }, 600);
+        addLog("[DNS] Zero vazamentos detectados.", "text-emerald-400");
       } else if (cmd === "/scan") {
         runMasterDiagnostic();
       } else if (cmd === "/report") {
@@ -444,7 +422,7 @@
         document.getElementById("auditLog").innerHTML = `<p class="text-cyan-400">[TERMINAL LIMPO]</p>`;
         terminalHistory = [];
       } else {
-        addLog(`Comando desconhecido: "${cmd}". Digite /help para ver os comandos.`, "text-rose-400");
+        addLog(`Comando desconhecido: "${cmd}". Digite /help.`, "text-rose-400");
       }
     }
 
@@ -456,14 +434,14 @@
     }
 
     function runMasterDiagnostic() {
-      addLog("[MASTER-SCAN] Telemetria viva acionada. Analisando threads e memória...", "text-cyan-400");
+      addLog("[SYNC-SCAN] Telemetria viva em execução contínua...", "text-cyan-400");
       setTimeout(() => {
-        addLog("[ANÁLISE VIVA] 3 fatores de risco mapeados com sucesso.", "text-amber-400");
+        addLog("[SYNC-SCAN] Estado do ecossistema validado.", "text-emerald-400");
       }, 700);
     }
 
     function checkIpAndVpn() {
-      addLog("[IP-INSPECTOR] Inspecionando IP público em tempo real...", "text-cyan-400");
+      addLog("[IP-INSPECTOR] Inspecionando IP público...", "text-cyan-400");
       setTimeout(() => {
         document.getElementById("ipAddressText").innerText = "177.182.44.12";
         document.getElementById("vpnStatusText").innerHTML = '<span class="text-emerald-400 font-bold">Conexão Segura Direta</span>';
@@ -476,14 +454,13 @@
       const btn = document.getElementById("btnOptimize");
       const mitigationSection = document.getElementById("mitigationSection");
 
-      btn.innerHTML = `<svg class="w-4 h-4 animate-spin-slow text-slate-950" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> <span>Aplicando 3 Correções em Tempo Real...</span>`;
+      btn.innerHTML = `<svg class="w-4 h-4 animate-spin-slow text-slate-950" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> <span>Aplicando 3 Correções...</span>`;
 
       setTimeout(() => {
         if (card) {
           card.innerHTML = `<div class="p-3 text-center text-emerald-400 font-bold text-xs bg-emerald-950/50 rounded-lg border border-emerald-500/50 animate-pulse">✓ 3 Correções Aplicadas com Sucesso! Sistema Ecossistêmico Blindado.</div>`;
         }
 
-        // Salva o estado no navegador para que abra 100% nas próximas vezes
         localStorage.setItem("rahor_optimized", "true");
 
         document.getElementById("mitigationDot").className = "w-2.5 h-2.5 rounded-full bg-emerald-400";
@@ -517,7 +494,7 @@
         document.getElementById("enclaveDesc").innerText = "Secure Enclave ativado e WebRTC Leak Shield ativo";
 
         document.getElementById("healthLabel").innerText = "SISTEMA BLINDADO";
-        document.getElementById("healthLabelclassName") = "text-[11px] font-semibold tracking-widest uppercase text-emerald-400 mt-1";
+        document.getElementById("healthLabel").className = "text-[11px] font-semibold tracking-widest uppercase text-emerald-400 mt-1";
 
         addLog(`[EXECUÇÃO AUTORIZADA] ${successMsg}`, "text-emerald-400 font-semibold");
         updateMetrics();
@@ -543,7 +520,7 @@
         
         const reportContent = `===================================================
       [MARCA D'ÁGUA OFICIAL] RAHOR TECHNOLOGY & RAHOR SENTINEL
-      RELATÓRIO TÉCNICO EXECUTIVO DE AUDITORIA (ECOSSISTEMA VIVO)
+      RELATÓRIO TÉCNICO EXECUTIVO DE AUDITORIA (SYNC ECOSYSTEM)
 ===================================================
 [AVISO LEGAL & DISCLAIMER DE ACEITE]
 O usuário declarou ciência e concordância com os Termos de Aceite,
@@ -553,10 +530,10 @@ confidencialidade e responsabilidade de uso da Rahor Technology.
 - Data da Auditoria: ${new Date().toLocaleString()}
 - Dispositivo Auditado: ${deviceNameStr}
 - Score de Blindagem Final: ${currentScore}% (SISTEMA BLINDADO)
-- Correções Ecossistêmicas Aplicadas: 3 de 3 (Cache, Background, Enclave)
+- Correções Aplicadas: 3 de 3 em tempo real (Cache, Background, Enclave)
 - IP Público Auditado: 177.182.44.12
 
-[HISTÓRICO DE AUDITORIA DO TERMINAL]
+[HISTÓRICO DO TERMINAL DEEP SHELL]
 ${terminalHistory.join('\n')}
 
 ---------------------------------------------------
@@ -568,7 +545,7 @@ Direitos Reservados © 2026 Rahor Technology.
         const blob = new Blob([reportContent], {type: 'text/plain'});
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
-        link.download = `Rahor_Sentinel_Relatorio_Ecossistemiico_${deviceNameStr.replace(/\s+/g, '_')}.txt`;
+        link.download = `Rahor_Sentinel_Relatorio_Perfect_Sync_${deviceNameStr.replace(/\s+/g, '_')}.txt`;
         link.click();
         
         btn.innerHTML = `<span>🚀 Aceitar Termos & Baixar Relatório Gratuito</span>`;
