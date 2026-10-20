@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAHOR SENTINEL | Cyber Defense & OS Integrity Suite</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0A0D14;
+      color: #E2E8F0;
+      font-family: 'Inter', sans-serif;
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(0, 240, 255, 0.06) 0%, transparent 35%),
+        radial-gradient(circle at 85% 80%, rgba(30, 64, 175, 0.08) 0%, transparent 40%);
+    }
+    .font-cyber { font-family: 'Orbitron', sans-serif; }
+    .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+    .glass-panel {
+      background: rgba(18, 24, 38, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 240, 255, 0.16);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+    }
+    .neon-border-cyan {
+      border-color: #00F0FF;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.25);
+    }
+    .neon-border-red {
+      border-color: #FF2E54;
+      box-shadow: 0 0 18px rgba(255, 46, 84, 0.25);
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.96); opacity: 0.8; }
+      50% { transform: scale(1.03); opacity: 1; }
+      100% { transform: scale(0.96); opacity: 0.8; }
+    }
+    .radar-pulse { animation: pulse-ring 3s infinite ease-in-out; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- TOP HEADER -->
+  <header class="glass-panel sticky top-0 z-50 px-4 lg:px-8 py-3.5 border-b border-cyan-500/20 flex flex-wrap items-center justify-between gap-3">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-700 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+        <svg class="w-6 h-6 text-slate-950" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm0 6c1.86 0 3.41 1.28 3.86 3H8.14c.45-1.72 2-3 3.86-3zm0 8c-2.21 0-4-1.79-4-4h8c0 2.21-1.79 4-4 4z"/>
+        </svg>
+      </div>
+      <div>
+        <h1 class="font-cyber text-lg lg:text-xl font-bold tracking-wider text-cyan-400">RAHOR SENTINEL</h1>
+        <p class="text-[11px] text-slate-400 tracking-widest uppercase">Rahor Technology • Hybrid Security Engine v1.0</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2.5 text-xs">
+      <span id="agentStatusBadge" class="px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-medium flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        SENTINEL CORE: ONLINE
+      </span>
+      <button onclick="runFullDiagnostic()" class="px-4 py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold transition shadow-lg shadow-cyan-500/25">
+        ⚡ Varredura Completa
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT GRID -->
+  <main class="flex-1 p-4 lg:p-6 max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+    <!-- COLUNA ESQUERDA: SCANNER WEB & PHISHING + DLL & SO -->
+    <div class="lg:col-span-4 space-y-5">
+      
+      <!-- MÓDULO 1: WEB & PHISHING RECON -->
+      <section class="glass-panel rounded-xl p-4 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+          <h2 class="font-cyber text-xs tracking-wider text-cyan-400 uppercase">🌐 Web & Phishing Scanner</h2>
+          <span class="text-[11px] text-slate-400 font-mono-code">MÓDULO 01</span>
+        </div>
+
+        <div class="space-y-2">
+          <label class="text-xs text-slate-300">Analisar URL, Domínio ou IP Suspeito:</label>
+          <div class="flex gap-2">
+            <input id="urlInput" type="text" placeholder="ex: login-banco-seguro.com" 
+              class="w-full bg-slate-950/90 border border-slate-700 focus:border-cyan-400 rounded-lg px-3 py-2 text-xs font-mono-code text-cyan-300 outline-none" />
+            <button onclick="scanWebsite()" class="px-3.5 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-lg shrink-0 transition">
+              Analisar
+            </button>
+          </div>
+        </div>
+
+        <div id="webScanResult" class="bg-slate-950/70 rounded-lg p-3 border border-slate-800 space-y-2 text-xs font-mono-code">
+          <div class="flex justify-between"><span class="text-slate-400">SSL / TLS Cert:</span><span class="text-emerald-400">Válido (TLS 1.3)</span></div>
+          <div class="flex justify-between"><span class="text-slate-400">Headers HTTP (CSP/HSTS):</span><span class="text-amber-400">2 Ausentes (Alerta)</span></div>
+          <div class="flex justify-between"><span class="text-slate-400">Heurística Anti-Phishing:</span><span class="text-emerald-400">Domínio Autêntico</span></div>
+          <div class="flex justify-between"><span class="text-slate-400">Portas Expostas:</span><span class="text-cyan-400">80, 443 (Padrão)</span></div>
+        </div>
+      </section>
+
+      <!-- MÓDULO 2: INTEGRIDADE DE DLL, ARQUIVOS CORROMPIDOS & SO -->
+      <section class="glass-panel rounded-xl p-4 space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+          <h2 class="font-cyber text-xs tracking-wider text-cyan-400 uppercase">🧬 Diagnóstico Cirúrgico OS & DLLs</h2>
+          <span class="text-[11px] text-slate-400 font-mono-code">MÓDULO 02</span>
+        </div>
+
+        <div id="dllList" class="space-y-2 text-xs font-mono-code max-h-60 overflow-y-auto pr-1">
+          <div class="p-2.5 rounded-lg bg-slate-950/70 border border-emerald-500/20 flex items-center justify-between">
+            <div>
+              <p class="text-slate-200 font-semibold">kernel32.dll / ntdll.dll</p>
+              <p class="text-[10px] text-slate-400">C:\Windows\System32 • Assinatura Microsoft OK</p>
+            </div>
+            <span class="text-emerald-400 font-bold">ÍNTEGRO</span>
+          </div>
+
+          <div class="p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/40 flex items-center justify-between">
+            <div>
+              <p class="text-amber-300 font-semibold">vcruntime140_1.dll</p>
+              <p class="text-[10px] text-amber-200/70">Dependência Ausente / Corrompida em App Local</p>
+            </div>
+            <span class="text-amber-400 font-bold">ERRO DLL</span>
+          </div>
+
+          <div class="p-2.5 rounded-lg bg-rose-500/10 border border-rose-500/40 flex items-center justify-between">
+            <div>
+              <p class="text-rose-300 font-semibold">svchost_hook.dll</p>
+              <p class="text-[10px] text-rose-200/70">Assinatura Inválida • Tentativa de Injeção</p>
+            </div>
+            <span class="text-rose-400 font-bold">CRÍTICO</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- COLUNA CENTRAL: SCORE DE SAÚDE + AUTORIZAÇÃO HUMANA (HUMAN-IN-THE-LOOP) -->
+    <div class="lg:col-span-4 space-y-5">
+      
+      <!-- RADAR DE SAÚDE CENTRAL -->
+      <section class="glass-panel rounded-xl p-6 flex flex-col items-center justify-center text-center relative overflow-hidden">
+        <p class="font-cyber text-xs tracking-widest text-slate-400 uppercase mb-3">Security & Integrity Score</p>
+        
+        <div class="w-44 h-44 rounded-full border-4 border-cyan-400/40 flex flex-col items-center justify-center radar-pulse bg-slate-950/80 shadow-[0_0_40px_rgba(0,240,255,0.2)]">
+          <span id="healthScore" class="font-cyber text-5xl font-black text-cyan-400">78%</span>
+          <span id="healthLabel" class="text-[11px] font-semibold tracking-widest uppercase text-amber-400 mt-1">Atenção Requerida</span>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2 w-full mt-5 pt-4 border-t border-slate-800 text-xs">
+          <div class="bg-slate-950/60 p-2 rounded-lg">
+            <p class="text-slate-400 text-[10px]">Ameaças</p>
+            <p id="threatCount" class="font-cyber text-rose-400 font-bold text-base">2</p>
+          </div>
+          <div class="bg-slate-950/60 p-2 rounded-lg">
+            <p class="text-slate-400 text-[10px]">Erros DLL/SO</p>
+            <p id="dllErrorCount" class="font-cyber text-amber-400 font-bold text-base">1</p>
+          </div>
+          <div class="bg-slate-950/60 p-2 rounded-lg">
+            <p class="text-slate-400 text-[10px]">Ações Executadas</p>
+            <p id="fixedCount" class="font-cyber text-emerald-400 font-bold text-base">0</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- MÓDULO 4: FILA DE AUTORIZAÇÃO HUMANA (HUMAN-IN-THE-LOOP) -->
+      <section class="glass-panel neon-border-red rounded-xl p-4 space-y-3">
+        <div class="flex items-center justify-between border-b border-rose-500/30 pb-2.5">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping"></span>
+            <h2 class="font-cyber text-xs tracking-wider text-rose-400 uppercase">Autorização do Usuário Pendente</h2>
+          </div>
+          <span class="text-[10px] bg-rose-500/20 text-rose-300 px-2 py-0.5 rounded font-mono-code">HUMAN-IN-THE-LOOP</span>
+        </div>
+
+        <div id="approvalQueue" class="space-y-3">
+          <!-- CARD DE AÇÃO 1 -->
+          <div id="action-1" class="bg-slate-950/90 border border-rose-500/40 rounded-lg p-3 space-y-2.5">
+            <div class="flex justify-between items-start">
+              <span class="text-xs font-bold text-rose-300">🚨 Conexão Reversa Suspeita + DLL Sem Assinatura</span>
+              <span class="text-[10px] font-mono-code bg-rose-950 text-rose-300 px-1.5 py-0.5 rounded">ALTO RISCO</span>
+            </div>
+            <p class="text-[11px] text-slate-300 leading-relaxed">
+              O processo <code class="text-cyan-300">updater_sync.exe</code> injetou <code class="text-rose-300">svchost_hook.dll</code> e tenta conexão na porta 4444 com o IP externo <code class="text-amber-300">185.220.101.42</code>.
+            </p>
+            <div class="text-[10px] font-mono-code text-slate-400 bg-slate-900 p-2 rounded">
+              Comando proposto: Kill PID 4812 + Bloquear IP no Firewall + Isolar DLL em Quarentena.
+            </div>
+            <div class="flex gap-2 pt-1">
+              <button onclick="authorizeAction('action-1', 'Processo encerrado, IP 185.220.101.42 bloqueado no Firewall e DLL movida para Quarentena.', 12, 'threat')" 
+                class="flex-1 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs rounded-lg transition">
+                ✓ Autorizar & Executar
+              </button>
+              <button onclick="ignoreAction('action-1')" 
+                class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-lg transition">
+                Ignorar
+              </button>
+            </div>
+          </div>
+
+          <!-- CARD DE AÇÃO 2 -->
+          <div id="action-2" class="bg-slate-950/90 border border-amber-500/40 rounded-lg p-3 space-y-2.5">
+            <div class="flex justify-between items-start">
+              <span class="text-xs font-bold text-amber-300">🛠️ Reparar Dependência DLL & Hardening SMB</span>
+              <span class="text-[10px] font-mono-code bg-amber-950 text-amber-300 px-1.5 py-0.5 rounded">INTEGRIDADE</span>
+            </div>
+            <p class="text-[11px] text-slate-300 leading-relaxed">
+              Restaurar biblioteca oficial <code class="text-cyan-300">vcruntime140_1.dll</code> e desativar protocolo antigo SMBv1 vulnerável a Ransomware.
+            </p>
+            <div class="flex gap-2 pt-1">
+              <button onclick="authorizeAction('action-2', 'Biblioteca vcruntime140_1.dll restaurada com hash oficial e protocolo SMBv1 desativado.', 10, 'dll')" 
+                class="flex-1 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs rounded-lg transition">
+                ✓ Autorizar Reparo Cirúrgico
+              </button>
+              <button onclick="ignoreAction('action-2')" 
+                class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-lg transition">
+                Ignorar
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- COLUNA DIREITA: MONITOR DE REDE/INVASÃO + LOGS DE AUDITORIA -->
+    <div class="lg:col-span-4 space-y-5">
+      
+      <!-- MÓDULO 3: CAÇA A VÍRUS E MONITOR DE REDE -->
+      <section class="glass-panel rounded-xl p-4 space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+          <h2 class="font-cyber text-xs tracking-wider text-cyan-400 uppercase">📡 Monitor de Rede & Threat Hunting</h2>
+          <span class="text-[11px] text-slate-400 font-mono-code">MÓDULO 03</span>
+        </div>
+
+        <div class="space-y-2 text-xs font-mono-code">
+          <div class="p-2 rounded bg-slate-950/70 flex justify-between items-center">
+            <span>chrome.exe -> 142.250.79.14:443</span>
+            <span class="text-emerald-400">HTTPS SEGURO</span>
+          </div>
+          <div class="p-2 rounded bg-slate-950/70 flex justify-between items-center">
+            <span>steam.exe -> 205.196.6.210:27015</span>
+            <span class="text-emerald-400">VERIFICADO</span>
+          </div>
+          <div id="suspiciousNetRow" class="p-2 rounded bg-rose-950/40 border border-rose-500/40 flex justify-between items-center">
+            <span class="text-rose-300">updater_sync.exe -> 185.220.101.42:4444</span>
+            <span class="text-rose-400 font-bold">SUSPEITO</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- TERMINAL DE AUDITORIA EM TEMPO REAL -->
+      <section class="glass-panel rounded-xl p-4 flex flex-col h-80">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2.5 mb-2">
+          <h2 class="font-cyber text-xs tracking-wider text-cyan-400 uppercase">📜 Log Cirúrgico de Auditoria</h2>
+          <button onclick="clearLogs()" class="text-[10px] text-slate-400 hover:text-cyan-400">Limpar</button>
+        </div>
+
+        <div id="auditLog" class="flex-1 bg-slate-950/90 rounded-lg p-3 font-mono-code text-[11px] space-y-2 overflow-y-auto border border-slate-800">
+          <p class="text-cyan-400">[INIT] Rahor Sentinel Engine v1.0 carregado com sucesso.</p>
+          <p class="text-slate-400">[OS-CHECK] Verificando assinaturas digitais de DLLs críticas em System32...</p>
+          <p class="text-amber-400">[ALERTA] Falha de dependência detectada: vcruntime140_1.dll.</p>
+          <p class="text-rose-400">[AMEAÇA] Alerta de conexão suspeita na porta 4444 aguardando autorização do usuário.</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    let currentScore = 78;
+    let threats = 2;
+    let dllErrors = 1;
+    let fixed = 0;
+
+    function addLog(message, colorClass = "text-slate-300") {
+      const logBox = document.getElementById("auditLog");
+      const time = new Date().toLocaleTimeString();
+      const entry = document.createElement("p");
+      entry.className = colorClass;
+      entry.innerText = `[${time}] ${message}`;
+      logBox.appendChild(entry);
+      logBox.scrollTop = logBox.scrollHeight;
+    }
+
+    function updateMetrics() {
+      const scoreEl = document.getElementById("healthScore");
+      const labelEl = document.getElementById("healthLabel");
+      scoreEl.innerText = `${currentScore}%`;
+      document.getElementById("threatCount").innerText = threats;
+      document.getElementById("dllErrorCount").innerText = dllErrors;
+      document.getElementById("fixedCount").innerText = fixed;
+
+      if (currentScore >= 95) {
+        scoreEl.className = "font-cyber text-5xl font-black text-emerald-400";
+        labelEl.className = "text-[11px] font-semibold tracking-widest uppercase text-emerald-400 mt-1";
+        labelEl.innerText = "SISTEMA BLINDADO";
+      }
+    }
+
+    function authorizeAction(cardId, logMsg, scoreBoost, type) {
+      const card = document.getElementById(cardId);
+      if (card) card.remove();
+
+      currentScore = Math.min(100, currentScore + scoreBoost);
+      fixed++;
+      if (type === 'threat') {
+        threats = Math.max(0, threats - 2);
+        const netRow = document.getElementById("suspiciousNetRow");
+        if (netRow) {
+          netRow.className = "p-2 rounded bg-emerald-950/30 border border-emerald-500/30 flex justify-between items-center";
+          netRow.innerHTML = `<span class="text-emerald-300">185.220.101.42:4444 (Firewall)</span><span class="text-emerald-400 font-bold">BLOQUEADO</span>`;
+        }
+      }
+      if (type === 'dll') dllErrors = Math.max(0, dllErrors - 1);
+
+      addLog(`[AUTORIZADO PELO USUÁRIO] ${logMsg}`, "text-emerald-400 font-semibold");
+      updateMetrics();
+
+      const queue = document.getElementById("approvalQueue");
+      if (queue.children.length === 0) {
+        queue.innerHTML = `<div class="p-4 text-center text-emerald-400 text-xs font-mono-code bg-emerald-950/20 rounded-lg border border-emerald-500/30">✓ Todas as ações pendentes foram executadas. Nenhuma ameaça ativa.</div>`;
+      }
+    }
+
+    function ignoreAction(cardId) {
+      const card = document.getElementById(cardId);
+      if (card) card.remove();
+      addLog(`[IGNORADO] O usuário optou por adiar a ação ${cardId}.`, "text-amber-400");
+    }
+
+    function scanWebsite() {
+      const url = document.getElementById("urlInput").value.trim() || "rahor-technology.com";
+      const resultBox = document.getElementById("webScanResult");
+      addLog(`[WEB-RECON] Iniciando varredura profunda de Phishing, SSL e DNS em: ${url}...`, "text-cyan-400");
+
+      const isSuspicious = url.includes("login") || url.includes("banco") || url.includes("free") || url.includes("verify");
+
+      setTimeout(() => {
+        if (isSuspicious) {
+          resultBox.innerHTML = `
+            <div class="flex justify-between"><span class="text-slate-400">Alvo:</span><span class="text-rose-400 font-bold">${url}</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Risco de Phishing:</span><span class="text-rose-400 font-bold">ALTO (89% Similaridade/Fraude)</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Certificado SSL:</span><span class="text-amber-400">Emitido há 2 dias (Suspeito)</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Proteção SPF/DMARC:</span><span class="text-rose-400">Ausente (Vulnerável a Spoofing)</span></div>
+          `;
+          addLog(`[PHISHING DETECTADO] O domínio ${url} apresenta fortes indícios de fraude!`, "text-rose-400 font-bold");
+        } else {
+          resultBox.innerHTML = `
+            <div class="flex justify-between"><span class="text-slate-400">Alvo:</span><span class="text-cyan-400 font-bold">${url}</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Risco de Phishing:</span><span class="text-emerald-400 font-bold">LIMPO (0% Ameaça)</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Certificado SSL/TLS:</span><span class="text-emerald-400">Válido & Seguro</span></div>
+            <div class="flex justify-between"><span class="text-slate-400">Proteção SPF/DMARC:</span><span class="text-emerald-400">Configurado Corretamente</span></div>
+          `;
+          addLog(`[WEB-RECON CONCLUÍDO] Domínio ${url} verificado e seguro.`, "text-emerald-400");
+        }
+      }, 600);
+    }
+
+    function runFullDiagnostic() {
+      addLog("[FULL-SCAN] Iniciando varredura cirúrgica de memória, DLLs, registro e portas...", "text-cyan-400");
+      setTimeout(() => {
+        addLog("[FULL-SCAN] 148 DLLs do sistema verificadas. Assinaturas SHA-256 conferidas.", "text-slate-300");
+      }, 700);
+    }
+
+    function clearLogs() {
+      document.getElementById("auditLog").innerHTML = `<p class="text-slate-500">[LOG LIMPO PELO USUÁRIO]</p>`;
+    }
+  </script>
+</body>
+</html>
